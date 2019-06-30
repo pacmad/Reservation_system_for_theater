@@ -59,12 +59,13 @@ export class LayoutComponent implements OnInit {
   }
 
   done() {
-    if (this.totSeats > this.selectSeats.length) {
+    if (this.totSeats != this.selectSeats.length) {
       this.toaster.open({
-        text: "You're selected less number of seats than entered...However we are proceeding with your selection",
+        text: "You are allowed to select number of seats you have enetered...(You cant select more or less than that)",
         caption:  ' Attention!!!',
-        type: "info",
+        type: "warning",
       });
+      return;
     }
     this.finalData['cName'] = this.custName;
     this.finalData['totSeats'] = this.selectSeats.length;

@@ -1,0 +1,116 @@
+<div class="d-flex justify-content-center">
+  <h3 class="text-center">MOVIE SEAT RESERVATION</h3>
+  <!-- <div class="col bg-success">.col</div>
+    <div class="col bg-warning">.col</div>
+    <div class="col bg-success">.col</div> -->
+</div>
+<div class="col-lg-12 details well">
+  <!-- <div class="col-lg-12"> -->
+  <div class="col-lg-2"></div>
+  <div class="col-lg-4 form-group">
+    <label>Name : </label>
+    <input type="text" class="form-control" placeholder="Enter Your Name" required [disabled]="disButton"
+      [(ngModel)]="custName">
+  </div>
+
+  <div class="col-lg-4 ">
+    <div class="col-lg-12">
+      <div class="col-lg-6"></div>
+      <div class="col-lg-6 form-group">
+        <label>Number of seats : </label>
+        <input type="number" required class="form-control" min="1" max="120" [disabled]="disButton"
+          [(ngModel)]="totSeats">
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-2"></div>
+</div>
+<div class="col-lg-12 details">
+  <div class="col-lg-2">
+  </div>
+  <div class="col-lg-6">
+    <button type="button" [disabled]="disButton" (click)="startSelection()" class="btn btn-primary">Start
+      Selecting</button>
+    <button type="button" [disabled]="!disButton" (click)="resetSelection()" class="btn btn-danger">Reset</button>
+
+  </div>
+
+  <div class="col-lg-3"></div>
+</div>
+<hr>
+<div class="col-lg-12 details">
+
+  <div class="col-lg-2"></div>
+  <div class="col-lg-8 screenDiv">
+
+    <h5 class="text-center">SCREEN</h5>
+  </div>
+  <div class="col-lg-2"></div>
+</div>
+<div class="col-lg-12 details " [ngClass]="divDisable">
+
+  <!-- </div> -->
+  <div class="col-lg-2"></div>
+  <div class="col-lg-8">
+
+    <!-- <div class="exit exit--front fuselage">
+
+  </div> -->
+    <br>
+    <ol>
+      <li *ngFor="let seats of rows">
+        <ol class="seats" type="A">
+          <li *ngFor="let seat of seats" class="seat">
+            <input (click)="seatAction(seat,$event)" type="checkbox" [checked]="booked?.includes(seat)"
+              [disabled]="booked?.includes(seat)" [id]="seat" />
+            <!-- <input (click)="seatAction(seat,$event)" type="checkbox" [checked]="seatsLayout?.booked?.includes(seat)" [disabled]="seatsLayout?.booked?.includes(seat)" [id]="seat" /> -->
+            <label [for]="seat"
+              [ngClass]="{'marginLeft': seat.charAt(0)=='F', 'marginBottom': seat.charAt(1)=='5'}">{{seat}}</label>
+          </li>
+        </ol>
+      </li>
+    </ol>
+  </div>
+  <div class="col-lg-2">
+    <img src="../../../assets/legend.JPG" width="190px" />
+  </div>
+</div>
+<!-- <div class="exit exit--back fuselage">
+
+  </div> -->
+<div class="col-lg-12 details">
+  <div class="col-lg-5"></div>
+  <div class="col-lg-2" [ngClass]="divDisable">
+    <button (click)="done()" type="button" class="btn btn-success">Confirm Selection</button>
+  </div>
+  <div class="col-lg-5"></div>
+</div>
+<hr>
+
+<div class="col-lg-12 details" *ngIf="booked">
+
+  <!-- </div> -->
+  <div class="col-lg-2"></div>
+  <div class="col-lg-8 ">
+    <br>
+    <h3 class="text-center"> Booking Information</h3>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>No of seats</th>
+          <th>Seats</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of getBookings">
+          <td>{{ getName(item) }}</td>
+          <td>{{ gettotSeats(item) }}</td>
+          <td>{{ getSeats(item) }}</td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+  <div class="col-lg-2"></div>
+</div>
